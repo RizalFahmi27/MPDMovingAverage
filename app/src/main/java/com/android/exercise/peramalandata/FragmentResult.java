@@ -1,9 +1,10 @@
 package com.android.exercise.peramalandata;
 
-import android.app.Fragment;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ public class FragmentResult extends Fragment implements FragmentCallBacks {
     LayoutInflater inflater = null;
     ListView listViewResultSet;
     ArrayList<Integer> data;
-    ArrayList<Float> processedData;
+    Map processedData;
     TextView error;
     TextView periode;
 
@@ -67,15 +68,14 @@ public class FragmentResult extends Fragment implements FragmentCallBacks {
         error  = (TextView) frameLayout.findViewById(R.id.textErrorManual);
 
         processedData = DataSetProcessor.beginCalculation(data);
+        ArrayList<Float> errorList = (ArrayList<Float>) processedData.get("errorAvg");
 
-        Adapter adapter = new Adapter(processedData);
-        Log.d("listview",""+processedData.size());
+        Adapter adapter = new Adapter(errorList);
+        Log.d("listview",""+errorList.size());
         listViewResultSet.setAdapter(adapter);
 
-        Collections.sort(processedData);
-
-        error.setText(""+processedData.get(0));
-        //periode.setText(""+);
+        periode.setText(""+(int)processedData.get("whichPeriod"));
+        error.setText(""+(Float)processedData.get("min"));
 
         return frameLayout;
 

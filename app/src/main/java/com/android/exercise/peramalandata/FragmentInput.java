@@ -1,9 +1,10 @@
 package com.android.exercise.peramalandata;
 
-import android.app.Fragment;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +42,7 @@ public class FragmentInput extends Fragment implements FragmentCallBacks {
     LayoutInflater inflater;
     boolean isEditTextFocused = false;
     RadioGroup radioGroup;
+    String choice;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,12 +73,21 @@ public class FragmentInput extends Fragment implements FragmentCallBacks {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FrameLayout linearLayout = (FrameLayout) inflater.inflate(R.layout.fragment_input,null);
 
+
+
         listViewInput = (LinearLayout) linearLayout.findViewById(R.id.listViewInput);
         go = (Button) linearLayout.findViewById(R.id.ButtonGo);
         editTextN = (EditText) linearLayout.findViewById(R.id.editN);
         inputGroup = (RelativeLayout) linearLayout.findViewById(R.id.relativeLayoutInput);
         columnName = (LinearLayout) linearLayout.findViewById(R.id.header);
         radioGroup = (RadioGroup) linearLayout.findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                choice = ((RadioButton)group.findViewById(radioGroup.getCheckedRadioButtonId())).getText().toString();
+                mainActivity.setInputMethod(choice);
+            }
+        });
 
         go.setOnClickListener(new View.OnClickListener() {
             @Override
