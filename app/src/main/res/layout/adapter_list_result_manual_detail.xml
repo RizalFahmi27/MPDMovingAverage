@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_weight="4">
+    <TextView
+    android:id="@+id/texttResultDetail"
+    android:textAlignment="center"
+    android:gravity="center"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="0.5"
+    android:text="t"
+    android:textSize="18sp"
+    android:background="#359eff"/>
+    <TextView
+        android:id="@+id/textDTResultDetail"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:text="dT"
+        android:textSize="18sp"
+        android:background="#359eff"/>
+    <TextView
+        android:id="@+id/textTResultDetail"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:text="dT"
+        android:textSize="18sp"
+        android:background="#359eff"/>
+    <TextView
+        android:id="@+id/textErrorResultDetail"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:text="Error"
+        android:textSize="18sp"
+        android:background="#359eff"/>
+</LinearLayout>
