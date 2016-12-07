@@ -63,6 +63,19 @@ public class DataSetProcessor {
             }
         }
 
+        float peramalan = 0.0f;
+        for(int i=0;i<errorValue.get(periode).size();i++){
+            if(errorValue.get(periode).get(i)!=null && i>(periode+2)){
+                Log.d("cobaperamalan","ke : "+(i+1)+ " = "+errorValue.get(periode).get(i));
+                peramalan+=errorValue.get(periode).get(i);
+            }
+        }
+        Log.d("cobaperamalan","pembagi : "+(n-(periode+2)));
+        Log.d("cobaperamalan","nilai akhir : "+peramalan+min);
+        Log.d("cobaperamalan","min : "+min);
+        peramalan=(peramalan+min)/(n-(periode+2));
+        Log.d("cobaperamalan","nilai peramalan : "+peramalan);
+        processedData.put("n+1",peramalan);
         processedData.put("whichPeriod",(periode+2));
         processedData.put("min",min);
         processedData.put("initial",data);

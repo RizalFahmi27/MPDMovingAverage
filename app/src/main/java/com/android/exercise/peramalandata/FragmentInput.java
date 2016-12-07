@@ -74,7 +74,6 @@ public class FragmentInput extends Fragment implements FragmentCallBacks {
         FrameLayout linearLayout = (FrameLayout) inflater.inflate(R.layout.fragment_input,null);
 
 
-
         listViewInput = (LinearLayout) linearLayout.findViewById(R.id.listViewInput);
         go = (Button) linearLayout.findViewById(R.id.ButtonGo);
         editTextN = (EditText) linearLayout.findViewById(R.id.editN);
@@ -104,13 +103,13 @@ public class FragmentInput extends Fragment implements FragmentCallBacks {
 
     private void populateEditText(int n, String selectedOption){
         listViewInput.removeAllViews();
-        if(n>0) {
+        if(n>5) {
             columnName.setVisibility(View.VISIBLE);
             mainActivity.onMessageToEnableButton(false);
         }
         else {
             columnName.setVisibility(View.GONE);
-            Toast.makeText(mContext, "Masukkan sedikitnya 1 data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Masukkan sedikitnya 5 data", Toast.LENGTH_SHORT).show();
             mainActivity.onMessageToEnableButton(true);
             return;
         }

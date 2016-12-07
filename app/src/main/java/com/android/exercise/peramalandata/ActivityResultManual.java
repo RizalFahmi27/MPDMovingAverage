@@ -28,7 +28,7 @@ public class ActivityResultManual extends AppCompatActivity {
         setContentView(R.layout.activity_result_manual);
 
         table = (ListView) findViewById(R.id.listViewResultManual);
-        hasilPeramalan = (TextView) findViewById(R.id.textHasilPermalan);
+        hasilPeramalan = (TextView) findViewById(R.id.textResultManualPeramalan);
         periode = (TextView) findViewById(R.id.textPeriodeManual);
         error = (TextView) findViewById(R.id.textErrorManual);
 
@@ -41,6 +41,7 @@ public class ActivityResultManual extends AppCompatActivity {
 
         periode.setText(""+(int)dataSet.get("selectedT"));
         error.setText(""+(Float)dataSet.get("iErrorAvg"));
+        hasilPeramalan.setText(""+(float)dataSet.get("n+1"));
 
 
     }

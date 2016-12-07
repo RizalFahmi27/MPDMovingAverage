@@ -119,6 +119,7 @@ public class FragmentResultManual extends Fragment implements FragmentCallBacks 
                 @Override
                 public void onClick(View v) {
                     HashMap individualData = new HashMap();
+                    individualData.put("n+1",dataset.get("n+1"));
                     individualData.put("iDt",dataset.get("initial"));
                     individualData.put("iError",errorList.get(position));
                     individualData.put("iT",TvalueList.get(position));

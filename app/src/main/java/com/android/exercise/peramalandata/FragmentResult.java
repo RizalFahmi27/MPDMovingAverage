@@ -2,6 +2,7 @@ package com.android.exercise.peramalandata;
 
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -61,24 +63,17 @@ public class FragmentResult extends Fragment implements FragmentCallBacks {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_result,null);
+         FrameLayout frameLayout = (FrameLayout) inflater.inflate(R.layout.fragment_result,null);
 
         listViewResultSet = (ListView) frameLayout.findViewById(R.id.listViewResult);
         periode = (TextView) frameLayout.findViewById(R.id.textPeriodeManual);
         error  = (TextView) frameLayout.findViewById(R.id.textErrorManual);
 
-        processedData = DataSetProcessor.beginCalculation(data);
-        ArrayList<Float> errorList = (ArrayList<Float>) processedData.get("errorAvg");
 
-        Adapter adapter = new Adapter(errorList);
-        Log.d("listview",""+errorList.size());
-        listViewResultSet.setAdapter(adapter);
-
-        periode.setText(""+(int)processedData.get("whichPeriod"));
-        error.setText(""+(Float)processedData.get("min"));
+        ProceedToDataBinding proceedToDataBinding = new ProceedToDataBinding();
+        proceedToDataBinding.execute(data);
 
         return frameLayout;
-
     }
 
 
@@ -148,5 +143,28 @@ public class FragmentResult extends Fragment implements FragmentCallBacks {
     private class ViewHolder{
         TextView T;
         TextView error;
+    }
+
+    private class ProceedToDataBinding extends AsyncTask<ArrayList<Integer>,Void,Map>{
+
+        @Override
+        protected Map doInBackground(ArrayList<Integer>... params) {
+            processedData = DataSetProcessor.beginCalculation(params[0]);
+
+            return processedData;
+        }
+
+        @Override
+        protected void onPostExecute(Map processedData) {
+            //processedData = DataSetProcessor.beginCalculation(data);
+            ArrayList<Float> errorList = (ArrayList<Float>) processedData.get("errorAvg");
+
+            Adapter adapter = new Adapter(errorList);
+            Log.d("listview",""+errorList.size());
+            listViewResultSet.setAdapter(adapter);
+
+            periode.setText(""+(int)processedData.get("whichPeriod"));
+            error.setText(""+(Float)processedData.get("min"));
+        }
     }
 }
